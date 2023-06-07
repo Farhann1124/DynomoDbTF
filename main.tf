@@ -30,6 +30,11 @@ aws dynamodb put-item \
   --region ${var.aws_region} \
   --table-name ${aws_dynamodb_table.example_table.name} \
   --item '{"id": {"N": "2"}, "name": {"S": "Jane"}, "age": {"N": "25"}}'
+
+aws dynamodb put-item \
+  --region ${var.aws_region} \
+  --table-name ${aws_dynamodb_table.example_table.name} \
+  --item '{"id": {"N": "3"}, "name": {"S": "James"}, "age": {"N": "23"}}'
 EOT
   }
 }
