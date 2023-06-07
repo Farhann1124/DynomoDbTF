@@ -22,12 +22,12 @@ resource "null_resource" "populate_data" {
   provisioner "local-exec" {
     command = <<EOT
 aws dynamodb put-item \
-  --region ${var.region} \
+  --region ${var.aws_region} \
   --table-name ${aws_dynamodb_table.example_table.name} \
   --item '{"id": {"N": "1"}, "name": {"S": "John"}, "age": {"N": "30"}}'
 
 aws dynamodb put-item \
-  --region ${var.region} \
+  --region ${var.aws_region} \
   --table-name ${aws_dynamodb_table.example_table.name} \
   --item '{"id": {"N": "2"}, "name": {"S": "Jane"}, "age": {"N": "25"}}'
 EOT
