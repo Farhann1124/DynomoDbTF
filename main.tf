@@ -3,7 +3,7 @@ terraform {
 }
 
 provider "aws" {
-  region = var.region
+  region = var.aws_region
 }
 
 resource "aws_dynamodb_table" "example_table" {
