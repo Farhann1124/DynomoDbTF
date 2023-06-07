@@ -16,17 +16,20 @@ resource "aws_dynamodb_table" "example_table" {
   }
 }
 
-resource "aws_dynamodb_table_item" "example_items" {
-  table_name = aws_dynamodb_table.example_table.name
+# Run the AWS CLI commands to populate data
+# This will be executed during the "terraform apply" step in GitHub Actions
+resource "null_resource" "populate_data" {
+  provisioner "local-exec" {
+    command = <<EOT
+aws dynamodb put-item \
+  --region ${var.region} \
+  --table-name ${aws_dynamodb_table.example_table.name} \
+  --item '{"id": {"N": "1"}, "name": {"S": "John"}, "age": {"N": "30"}}'
 
-  item {
-    id   = "1"
-    name = "John"
-    age  = 30
-  }
-  item {
-    id   = "2"
-    name = "Jane"
-    age  = 25
+aws dynamodb put-item \
+  --region ${var.region} \
+  --table-name ${aws_dynamodb_table.example_table.name} \
+  --item '{"id": {"N": "2"}, "name": {"S": "Jane"}, "age": {"N": "25"}}'
+EOT
   }
 }
