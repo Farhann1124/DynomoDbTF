@@ -38,3 +38,4 @@ aws dynamodb put-item \
 EOT
   }
 }
+
